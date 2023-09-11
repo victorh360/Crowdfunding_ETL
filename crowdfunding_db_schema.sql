@@ -3,12 +3,12 @@
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
 
-CREATE TABLE "Campaingn" (
+CREATE TABLE "campaign" (
     "contact_id" VARCHAR   NOT NULL,
     "first_name" VARCHAR   NOT NULL,
     "last_name" VARCHAR   NOT NULL,
     "email" VARCHAR   NOT NULL,
-    CONSTRAINT "pk_Campaingn" PRIMARY KEY (
+    CONSTRAINT "pk_campaign" PRIMARY KEY (
         "contact_id"
      )
 );
@@ -25,7 +25,7 @@ CREATE TABLE "Contacts" (
     "country" VARCHAR   NOT NULL,
     "currency" VARCHAR   NOT NULL,
     "launch_date" DATE   NOT NULL,
-    "end_datev" DATE   NOT NULL,
+    "end_date" DATE   NOT NULL,
     "category_id" VARCHAR   NOT NULL,
     "subcategory_id" VARCHAR   NOT NULL,
     CONSTRAINT "pk_Contacts" PRIMARY KEY (
@@ -35,7 +35,7 @@ CREATE TABLE "Contacts" (
 
 CREATE TABLE "Category" (
     "category_id" varchar   NOT NULL,
-    "categoies" varchar   NOT NULL,
+    "categories" varchar   NOT NULL,
     CONSTRAINT "pk_Category" PRIMARY KEY (
         "category_id"
      )
@@ -43,13 +43,13 @@ CREATE TABLE "Category" (
 
 CREATE TABLE "Subcategory" (
     "subcategory_id" varchar   NOT NULL,
-    "subcategoies" varchar   NOT NULL,
+    "subcategories" varchar   NOT NULL,
     CONSTRAINT "pk_Subcategory" PRIMARY KEY (
         "subcategory_id"
      )
 );
 
-ALTER TABLE "Campaingn" ADD CONSTRAINT "fk_Campaingn_contact_id" FOREIGN KEY("contact_id")
+ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_contact_id" FOREIGN KEY("contact_id")
 REFERENCES "Contacts" ("cf_id");
 
 ALTER TABLE "Category" ADD CONSTRAINT "fk_Category_category_id" FOREIGN KEY("category_id")
