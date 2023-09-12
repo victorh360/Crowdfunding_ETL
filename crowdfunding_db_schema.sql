@@ -1,25 +1,10 @@
-﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
--- Link to schema: https://app.quickdatabasediagrams.com/#/d/Lz7vWY
--- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
-
-
-CREATE TABLE "campaign" (
-    "contact_id" VARCHAR   NOT NULL,
-    "first_name" VARCHAR   NOT NULL,
-    "last_name" VARCHAR   NOT NULL,
-    "email" VARCHAR   NOT NULL,
-    CONSTRAINT "pk_campaign" PRIMARY KEY (
-        "contact_id"
-     )
-);
-
-CREATE TABLE "Contacts" (
-    "cf_id" VARCHAR   NOT NULL,
-    "contact_id" VARCHAR   NOT NULL,
+﻿CREATE TABLE "campaign" (
+    "cf_id" INT   NOT NULL,
+    "contact_id" INT   NOT NULL,
     "company_name" VARCHAR   NOT NULL,
     "description" VARCHAR   NOT NULL,
-    "goal" VARCHAR   NOT NULL,
-    "pledged" VARCHAR   NOT NULL,
+    "goal" NUMERIC(10,2)   NOT NULL,
+    "pledged" NUMERIC(10,2)   NOT NULL,
     "outcome" VARCHAR   NOT NULL,
     "backers_count" INT   NOT NULL,
     "country" VARCHAR   NOT NULL,
@@ -28,33 +13,42 @@ CREATE TABLE "Contacts" (
     "end_date" DATE   NOT NULL,
     "category_id" VARCHAR   NOT NULL,
     "subcategory_id" VARCHAR   NOT NULL,
-    CONSTRAINT "pk_Contacts" PRIMARY KEY (
-        "cf_id"
+    CONSTRAINT "pk_campaign" PRIMARY KEY (
+        "cf_id","contact_id"
      )
 );
 
-CREATE TABLE "Category" (
-    "category_id" varchar   NOT NULL,
-    "categories" varchar   NOT NULL,
-    CONSTRAINT "pk_Category" PRIMARY KEY (
+CREATE TABLE "contacts" (
+    "contact_id" INT   NOT NULL,
+    "first_name" VARCHAR   NOT NULL,
+    "last_name" VARCHAR   NOT NULL,
+    CONSTRAINT "pk_contacts" PRIMARY KEY (
+        "contact_id"
+     )
+);
+
+CREATE TABLE "category" (
+    "category_id" VARCHAR   NOT NULL,
+    "category" VARCHAR   NOT NULL,
+    CONSTRAINT "pk_category" PRIMARY KEY (
         "category_id"
      )
 );
 
-CREATE TABLE "Subcategory" (
-    "subcategory_id" varchar   NOT NULL,
-    "subcategories" varchar   NOT NULL,
-    CONSTRAINT "pk_Subcategory" PRIMARY KEY (
+CREATE TABLE "subcategory" (
+    "subcategory_id" VARCHAR   NOT NULL,
+    "subcategory" VARCHAR   NOT NULL,
+    CONSTRAINT "pk_subcategory" PRIMARY KEY (
         "subcategory_id"
      )
 );
 
 ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_contact_id" FOREIGN KEY("contact_id")
-REFERENCES "Contacts" ("cf_id");
+REFERENCES "contacts" ("contact_id");
 
-ALTER TABLE "Category" ADD CONSTRAINT "fk_Category_category_id" FOREIGN KEY("category_id")
-REFERENCES "Contacts" ("category_id");
+ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_category_id" FOREIGN KEY("category_id")
+REFERENCES "category" ("category_id");
 
-ALTER TABLE "Subcategory" ADD CONSTRAINT "fk_Subcategory_subcategory_id" FOREIGN KEY("subcategory_id")
-REFERENCES "Contacts" ("subcategory_id");
+ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_subcategory_id" FOREIGN KEY("subcategory_id")
+REFERENCES "subcategory" ("subcategory_id");
 
